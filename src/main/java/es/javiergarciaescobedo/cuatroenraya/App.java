@@ -20,15 +20,15 @@ public class App extends Application {
         Tablero tablero = new Tablero();
         root.getChildren().add(tablero);
 
-        Ficha ficha = new Ficha(1);
-        ficha.setLayoutX(100);
-        ficha.setLayoutY(100);
-        tablero.getChildren().add(ficha);
-
-        Ficha ficha2 = new Ficha(2);
-        ficha2.setLayoutX(50);
-        ficha2.setLayoutY(50);
-        tablero.getChildren().add(ficha2);
+//        Ficha ficha = new Fischa(1);
+//        ficha.setLayoutX(100);
+//        ficha.setLayoutY(100);
+//        tablero.getChildren().add(ficha);
+//
+//        Ficha ficha2 = new Ficha(2);
+//        ficha2.setLayoutX(50);
+//        ficha2.setLayoutY(50);
+//        tablero.getChildren().add(ficha2);
         
     }
 
