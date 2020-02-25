@@ -19,6 +19,9 @@ public class App extends Application {
         
         Tablero tablero = new Tablero();
         root.getChildren().add(tablero);
+        
+        CuatroEnRaya cuatroEnRaya = new CuatroEnRaya();
+        cuatroEnRaya.mostrarConsola();
 
 //        Ficha ficha = new Fischa(1);
 //        ficha.setLayoutX(100);
