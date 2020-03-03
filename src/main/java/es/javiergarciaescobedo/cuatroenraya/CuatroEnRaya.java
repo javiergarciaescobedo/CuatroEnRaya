@@ -21,4 +21,14 @@ public class CuatroEnRaya {
         }        
     }
     
+    public int getFilaColocar(int columnaColocar) {
+        int filaColocar = -1;
+        // Mientras no hayamos llegado al final y está vacía debajo
+        while(filaColocar<5 && cuadricula[filaColocar+1][columnaColocar]=='.') {
+            filaColocar++;
+        }
+        System.out.println("Colocar en fila: " + filaColocar);
+        return filaColocar;
+    }
+    
 }

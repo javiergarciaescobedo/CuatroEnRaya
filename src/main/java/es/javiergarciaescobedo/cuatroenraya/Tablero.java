@@ -8,8 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
-public class Tablero extends Pane {
-                    
+public class Tablero extends Pane {     
+            
     public Tablero() {
         for(int i=0; i<8; i++) {
             Line line = new Line(Ficha.TAM_FICHA*i, Ficha.TAM_FICHA, 
@@ -33,16 +33,21 @@ public class Tablero extends Pane {
         ficha.setLayoutY(Ficha.TAM_FICHA / 2);
         this.getChildren().add(ficha);
         
-        caerFicha(ficha);
+        CuatroEnRaya cuatroEnRaya = new CuatroEnRaya();
+        int filaColocar = cuatroEnRaya.getFilaColocar(columna);
+        cuatroEnRaya.mostrarConsola();
+        
+        this.caerFicha(ficha, filaColocar);
     }
     
-    private void caerFicha(Ficha ficha) {
+    private void caerFicha(Ficha ficha, int filaColocar) {
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) -> {
                 ficha.setLayoutY(ficha.getLayoutY() + 1);
             })
         );
-        timeline.setCycleCount(Ficha.TAM_FICHA * 6);
+        
+        timeline.setCycleCount(Ficha.TAM_FICHA * (filaColocar+1));
         timeline.play();
         timeline.setOnFinished((ActionEvent ae) -> {
             System.out.println("Ficha colocada en su sitio");
