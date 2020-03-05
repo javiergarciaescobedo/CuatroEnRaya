@@ -31,4 +31,9 @@ public class CuatroEnRaya {
         return filaColocar;
     }
     
+    public void colocarFicha(int fila, int columna, char jugador) {
+        System.out.println("Colocando ficha en matriz: "+fila+","+columna+","+jugador);
+        cuadricula[fila][columna] = jugador;
+    }
+    
 }

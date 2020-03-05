@@ -10,12 +10,17 @@ import javafx.util.Duration;
 
 public class Tablero extends Pane {     
             
+    CuatroEnRaya cuatroEnRaya;
+            
     public Tablero() {
+        cuatroEnRaya = new CuatroEnRaya();
+        
         for(int i=0; i<8; i++) {
             Line line = new Line(Ficha.TAM_FICHA*i, Ficha.TAM_FICHA, 
                     Ficha.TAM_FICHA*i, Ficha.TAM_FICHA*7);
             this.getChildren().add(line);
         }
+        
         this.setOnMouseClicked((MouseEvent mouseEvent) -> {
             System.out.println("Mouse clicked X,Y: " +
                     mouseEvent.getX() + " : " + mouseEvent.getY());
@@ -33,11 +38,12 @@ public class Tablero extends Pane {
         ficha.setLayoutY(Ficha.TAM_FICHA / 2);
         this.getChildren().add(ficha);
         
-        CuatroEnRaya cuatroEnRaya = new CuatroEnRaya();
         int filaColocar = cuatroEnRaya.getFilaColocar(columna);
-        cuatroEnRaya.mostrarConsola();
         
         this.caerFicha(ficha, filaColocar);
+        
+        cuatroEnRaya.colocarFicha(filaColocar, columna, '1');
+        cuatroEnRaya.mostrarConsola();
     }
     
     private void caerFicha(Ficha ficha, int filaColocar) {
