@@ -11,6 +11,7 @@ import javafx.util.Duration;
 public class Tablero extends Pane {     
             
     CuatroEnRaya cuatroEnRaya;
+    final byte VELOCIDAD_CAIDA = 4;
             
     public Tablero() {
         cuatroEnRaya = new CuatroEnRaya();
@@ -27,12 +28,12 @@ public class Tablero extends Pane {
             int clicX = (int)mouseEvent.getX();
             int columna = clicX / Ficha.TAM_FICHA;
             System.out.println("Columna: " + columna);
-            colocarFicha(columna, 2);
+            colocarFicha(columna);
         });
     }
     
-    private void colocarFicha(int columna, int jugador) {
-        Ficha ficha = new Ficha(jugador);
+    private void colocarFicha(int columna) {
+        Ficha ficha = new Ficha(cuatroEnRaya.turnoJugador);
 //        ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
         ficha.setLayoutX((columna + 0.5) * Ficha.TAM_FICHA);
         ficha.setLayoutY(Ficha.TAM_FICHA / 2);
@@ -42,18 +43,19 @@ public class Tablero extends Pane {
         
         this.caerFicha(ficha, filaColocar);
         
-        cuatroEnRaya.colocarFicha(filaColocar, columna, '1');
+        cuatroEnRaya.colocarFicha(filaColocar, columna);
         cuatroEnRaya.mostrarConsola();
+        cuatroEnRaya.cambiarJugador();
     }
     
     private void caerFicha(Ficha ficha, int filaColocar) {
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(0.017), (ActionEvent ae) -> {
-                ficha.setLayoutY(ficha.getLayoutY() + 1);
+                ficha.setLayoutY(ficha.getLayoutY() + VELOCIDAD_CAIDA);
             })
         );
         
-        timeline.setCycleCount(Ficha.TAM_FICHA * (filaColocar+1));
+        timeline.setCycleCount((Ficha.TAM_FICHA * (filaColocar+1)) / VELOCIDAD_CAIDA);
         timeline.play();
         timeline.setOnFinished((ActionEvent ae) -> {
             System.out.println("Ficha colocada en su sitio");

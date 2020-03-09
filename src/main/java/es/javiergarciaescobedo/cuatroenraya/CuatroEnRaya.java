@@ -3,6 +3,9 @@ package es.javiergarciaescobedo.cuatroenraya;
 public class CuatroEnRaya {
     
     char[][] cuadricula = new char[6][7];
+    char turnoJugador = '1';
+    static final char JUGADOR_1 = '1';
+    static final char JUGADOR_2 = '2';
     
     public CuatroEnRaya() {
         for(int f=0; f<6; f++) {
@@ -31,9 +34,17 @@ public class CuatroEnRaya {
         return filaColocar;
     }
     
-    public void colocarFicha(int fila, int columna, char jugador) {
-        System.out.println("Colocando ficha en matriz: "+fila+","+columna+","+jugador);
-        cuadricula[fila][columna] = jugador;
+    public void colocarFicha(int fila, int columna) {
+        System.out.println("Colocando ficha en matriz: "+fila+","+columna+","+turnoJugador);
+        cuadricula[fila][columna] = turnoJugador;
+    }
+    
+    public void cambiarJugador() {
+        if(turnoJugador == JUGADOR_1) {
+            turnoJugador = JUGADOR_2;
+        } else {
+            turnoJugador = JUGADOR_1;
+        }
     }
     
 }
