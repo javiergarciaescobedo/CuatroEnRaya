@@ -45,6 +45,8 @@ public class Tablero extends Pane {
         
         cuatroEnRaya.colocarFicha(filaColocar, columna);
         cuatroEnRaya.mostrarConsola();
+        int numFichasRaya = cuatroEnRaya.getNumFichasRaya(filaColocar, columna);
+        System.out.println("numFichasRaya: " + numFichasRaya);
         cuatroEnRaya.cambiarJugador();
     }
     

@@ -46,5 +46,32 @@ public class CuatroEnRaya {
             turnoJugador = JUGADOR_1;
         }
     }
+ 
+    public int getNumFichasRaya(int fila, int columna) {
+        char jugador = cuadricula[fila][columna];
+        int contadorFichasRaya = 1;
+        int i=1;
+        try {
+            while(cuadricula[fila][columna+i] == jugador) {
+                contadorFichasRaya++;
+                i++;
+            }
+        } catch(Exception e) {
+            
+        }
+        // Otra manera de hacer el bucle
+//        for(int i=1; cuadricula[fila][columna+i] == jugador; i++) {            
+//        }  
+        i=1;
+        try {
+            while(cuadricula[fila][columna-i] == jugador) {
+                contadorFichasRaya++;
+                i++;
+            }
+        } catch(Exception e) {
+            
+        }
+        return contadorFichasRaya;
+    }
     
 }
