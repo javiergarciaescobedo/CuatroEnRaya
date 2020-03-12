@@ -47,12 +47,12 @@ public class CuatroEnRaya {
         }
     }
  
-    public int getNumFichasRaya(int fila, int columna) {
+    public int getNumFichasRaya(int fila, int columna, int incFil, int incCol) {
         char jugador = cuadricula[fila][columna];
         int contadorFichasRaya = 1;
         int i=1;
         try {
-            while(cuadricula[fila][columna+i] == jugador) {
+            while(cuadricula[fila + (i * incFil)][columna + (i * incCol)] == jugador) {
                 contadorFichasRaya++;
                 i++;
             }
@@ -64,7 +64,7 @@ public class CuatroEnRaya {
 //        }  
         i=1;
         try {
-            while(cuadricula[fila][columna-i] == jugador) {
+            while(cuadricula[fila - (i * incFil)][columna - (i * incCol)] == jugador) {
                 contadorFichasRaya++;
                 i++;
             }
@@ -72,6 +72,14 @@ public class CuatroEnRaya {
             
         }
         return contadorFichasRaya;
+    }
+    
+    public boolean isGanador(int numFichasRayaHoriz, int numFichasRayaVert, int numFichasRayaDiag1, int numFichasRayaDiag2) {
+        if(numFichasRayaHoriz >= 4 || numFichasRayaVert >= 4 || numFichasRayaDiag1 >= 4 || numFichasRayaDiag2 >= 4) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

@@ -45,8 +45,24 @@ public class Tablero extends Pane {
         
         cuatroEnRaya.colocarFicha(filaColocar, columna);
         cuatroEnRaya.mostrarConsola();
-        int numFichasRaya = cuatroEnRaya.getNumFichasRaya(filaColocar, columna);
-        System.out.println("numFichasRaya: " + numFichasRaya);
+        // Chequeo horizontal
+        int numFichasRayaHoriz = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 0, 1);
+        // Chequeo vertical
+        int numFichasRayaVert = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 0);
+        // Chequeo diagonal 1
+        int numFichasRayaDiag1 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, -1, 1);
+        // Chequeo diagonal 2
+        int numFichasRayaDiag2 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 1);
+        System.out.println("numFichasRayaHoriz: " + numFichasRayaHoriz);
+        System.out.println("numFichasRayaVert: " + numFichasRayaVert);
+        System.out.println("numFichasRayaDiag1: " + numFichasRayaDiag1);
+        System.out.println("numFichasRayaDiag2: " + numFichasRayaDiag2);
+        
+        if(cuatroEnRaya.isGanador(numFichasRayaHoriz, numFichasRayaVert, 
+                numFichasRayaDiag1, numFichasRayaDiag2)) {
+            System.out.println("Ha ganado");
+        }
+                
         cuatroEnRaya.cambiarJugador();
     }
     
