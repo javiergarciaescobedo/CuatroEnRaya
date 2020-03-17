@@ -3,6 +3,8 @@ package es.javiergarciaescobedo.cuatroenraya;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -60,7 +62,14 @@ public class Tablero extends Pane {
         
         if(cuatroEnRaya.isGanador(numFichasRayaHoriz, numFichasRayaVert, 
                 numFichasRayaDiag1, numFichasRayaDiag2)) {
-            System.out.println("Ha ganado");
+            char ganador = cuatroEnRaya.turnoJugador;
+            System.out.println("Ha ganado: " + ganador);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("¡Enhorabuena!");
+            alert.setHeaderText(null);
+            alert.setContentText("Has ganado la partida jugador " + ganador);
+
+            alert.showAndWait();
         }
                 
         cuatroEnRaya.cambiarJugador();
