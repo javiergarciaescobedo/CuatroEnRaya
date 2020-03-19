@@ -18,21 +18,7 @@ public class App extends Application {
         stage.show();
         
         Tablero tablero = new Tablero();
-        root.getChildren().add(tablero);
-        
-        CuatroEnRaya cuatroEnRaya = new CuatroEnRaya();
-        cuatroEnRaya.mostrarConsola();
-
-//        Ficha ficha = new Fischa(1);
-//        ficha.setLayoutX(100);
-//        ficha.setLayoutY(100);
-//        tablero.getChildren().add(ficha);
-//
-//        Ficha ficha2 = new Ficha(2);
-//        ficha2.setLayoutX(50);
-//        ficha2.setLayoutY(50);
-//        tablero.getChildren().add(ficha2);
-        
+        root.getChildren().add(tablero); 
     }
 
     public static void main(String[] args) {

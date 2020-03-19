@@ -2,22 +2,24 @@ package es.javiergarciaescobedo.cuatroenraya;
 
 public class CuatroEnRaya {
     
-    char[][] cuadricula = new char[6][7];
+    final byte NUM_FILAS = 6;
+    final byte NUM_COLUMNAS = 7;    
+    char[][] cuadricula = new char[NUM_FILAS][NUM_COLUMNAS];
     char turnoJugador = '1';
     static final char JUGADOR_1 = '1';
     static final char JUGADOR_2 = '2';
     
     public CuatroEnRaya() {
-        for(int f=0; f<6; f++) {
-            for(int c=0; c<7; c++) {
+        for(int f=0; f<NUM_FILAS; f++) {
+            for(int c=0; c<NUM_COLUMNAS; c++) {
                 cuadricula[f][c] = '.';
             }
         }
     }
     
     public void mostrarConsola() {
-        for(int f=0; f<6; f++) {
-            for(int c=0; c<7; c++) {
+        for(int f=0; f<NUM_FILAS; f++) {
+            for(int c=0; c<NUM_COLUMNAS; c++) {
                 System.out.print(cuadricula[f][c]);
             }
             System.out.println("");
@@ -80,6 +82,18 @@ public class CuatroEnRaya {
         } else {
             return false;
         }
+        
+    }
+    
+    public boolean isEmpatado() {
+        for(int f=0; f<NUM_FILAS; f++) {
+            for(int c=0; c<NUM_COLUMNAS; c++) {
+                if(cuadricula[f][c] == '.') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
 }

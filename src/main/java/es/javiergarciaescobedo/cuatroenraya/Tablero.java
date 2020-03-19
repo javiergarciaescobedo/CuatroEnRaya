@@ -22,6 +22,7 @@ public class Tablero extends Pane {
             Line line = new Line(Ficha.TAM_FICHA*i, Ficha.TAM_FICHA, 
                     Ficha.TAM_FICHA*i, Ficha.TAM_FICHA*7);
             this.getChildren().add(line);
+            
         }
         
         this.setOnMouseClicked((MouseEvent mouseEvent) -> {
@@ -68,8 +69,16 @@ public class Tablero extends Pane {
             alert.setTitle("¡Enhorabuena!");
             alert.setHeaderText(null);
             alert.setContentText("Has ganado la partida jugador " + ganador);
-
             alert.showAndWait();
+        } else {
+            if(cuatroEnRaya.isEmpatado()) {
+                System.out.println("Hay empate");
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("¡Empate!");
+                alert.setHeaderText(null);
+                alert.setContentText("Se ha producido un empate");
+                alert.showAndWait();
+            }
         }
                 
         cuatroEnRaya.cambiarJugador();
