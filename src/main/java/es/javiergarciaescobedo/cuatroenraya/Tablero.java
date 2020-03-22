@@ -35,53 +35,61 @@ public class Tablero extends Pane {
         });
     }
     
-    private void colocarFicha(int columna) {
-        Ficha ficha = new Ficha(cuatroEnRaya.turnoJugador);
-//        ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
-        ficha.setLayoutX((columna + 0.5) * Ficha.TAM_FICHA);
-        ficha.setLayoutY(Ficha.TAM_FICHA / 2);
-        this.getChildren().add(ficha);
-        
+    private void colocarFicha(int columna) {        
         int filaColocar = cuatroEnRaya.getFilaColocar(columna);
+        if(filaColocar != -1) {
+            Ficha ficha = new Ficha(cuatroEnRaya.turnoJugador);
+    //        ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
+            ficha.setLayoutX((columna + 0.5) * Ficha.TAM_FICHA);
+            ficha.setLayoutY(Ficha.TAM_FICHA / 2);
+            this.getChildren().add(ficha);
         
-        this.caerFicha(ficha, filaColocar);
-        
-        cuatroEnRaya.colocarFicha(filaColocar, columna);
-        cuatroEnRaya.mostrarConsola();
-        // Chequeo horizontal
-        int numFichasRayaHoriz = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 0, 1);
-        // Chequeo vertical
-        int numFichasRayaVert = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 0);
-        // Chequeo diagonal 1
-        int numFichasRayaDiag1 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, -1, 1);
-        // Chequeo diagonal 2
-        int numFichasRayaDiag2 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 1);
-        System.out.println("numFichasRayaHoriz: " + numFichasRayaHoriz);
-        System.out.println("numFichasRayaVert: " + numFichasRayaVert);
-        System.out.println("numFichasRayaDiag1: " + numFichasRayaDiag1);
-        System.out.println("numFichasRayaDiag2: " + numFichasRayaDiag2);
-        
-        if(cuatroEnRaya.isGanador(numFichasRayaHoriz, numFichasRayaVert, 
-                numFichasRayaDiag1, numFichasRayaDiag2)) {
-            char ganador = cuatroEnRaya.turnoJugador;
-            System.out.println("Ha ganado: " + ganador);
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("¡Enhorabuena!");
-            alert.setHeaderText(null);
-            alert.setContentText("Has ganado la partida jugador " + ganador);
-            alert.showAndWait();
-        } else {
-            if(cuatroEnRaya.isEmpatado()) {
-                System.out.println("Hay empate");
+            this.caerFicha(ficha, filaColocar);
+
+            cuatroEnRaya.colocarFicha(filaColocar, columna);
+            cuatroEnRaya.mostrarConsola();
+            // Chequeo horizontal
+            int numFichasRayaHoriz = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 0, 1);
+            // Chequeo vertical
+            int numFichasRayaVert = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 0);
+            // Chequeo diagonal 1
+            int numFichasRayaDiag1 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, -1, 1);
+            // Chequeo diagonal 2
+            int numFichasRayaDiag2 = cuatroEnRaya.getNumFichasRaya(filaColocar, columna, 1, 1);
+            System.out.println("numFichasRayaHoriz: " + numFichasRayaHoriz);
+            System.out.println("numFichasRayaVert: " + numFichasRayaVert);
+            System.out.println("numFichasRayaDiag1: " + numFichasRayaDiag1);
+            System.out.println("numFichasRayaDiag2: " + numFichasRayaDiag2);
+
+            if(cuatroEnRaya.isGanador(numFichasRayaHoriz, numFichasRayaVert, 
+                    numFichasRayaDiag1, numFichasRayaDiag2)) {
+                char ganador = cuatroEnRaya.turnoJugador;
+                System.out.println("Ha ganado: " + ganador);
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("¡Empate!");
+                alert.setTitle("¡Enhorabuena!");
                 alert.setHeaderText(null);
-                alert.setContentText("Se ha producido un empate");
+                alert.setContentText("Has ganado la partida jugador " + ganador);
                 alert.showAndWait();
+            } else {
+                if(cuatroEnRaya.isEmpatado()) {
+                    System.out.println("Hay empate");
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("¡Empate!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Se ha producido un empate");
+                    alert.showAndWait();
+                }
             }
+
+            cuatroEnRaya.cambiarJugador();
+        } else {
+            System.out.println("No se puede colocar la ficha");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("¡Atención!");
+            alert.setHeaderText(null);
+            alert.setContentText("No se puede poner la ficha en esa columna");
+            alert.showAndWait();
         }
-                
-        cuatroEnRaya.cambiarJugador();
     }
     
     private void caerFicha(Ficha ficha, int filaColocar) {
