@@ -16,6 +16,11 @@ public class Tablero extends Pane {
     final byte VELOCIDAD_CAIDA = 4;
             
     public Tablero() {
+        
+        this.setStyle("-fx-background-color: green");
+        this.setMaxWidth(Ficha.TAM_FICHA*7);
+        this.setMinWidth(Ficha.TAM_FICHA*7);
+
         cuatroEnRaya = new CuatroEnRaya();
         
         for(int i=0; i<8; i++) {
