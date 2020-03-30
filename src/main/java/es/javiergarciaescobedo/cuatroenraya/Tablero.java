@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -14,8 +15,11 @@ public class Tablero extends Pane {
             
     CuatroEnRaya cuatroEnRaya;
     final byte VELOCIDAD_CAIDA = 4;
+    Label labelTurno;
             
-    public Tablero() {
+    public Tablero(Label labelTurno) {
+        
+        this.labelTurno = labelTurno;
         
         this.setStyle("-fx-background-color: green");
         this.setMaxWidth(Ficha.TAM_FICHA*7);
@@ -87,6 +91,7 @@ public class Tablero extends Pane {
             }
 
             cuatroEnRaya.cambiarJugador();
+            labelTurno.setText(""+cuatroEnRaya.turnoJugador);
         } else {
             System.out.println("No se puede colocar la ficha");
             Alert alert = new Alert(AlertType.WARNING);
