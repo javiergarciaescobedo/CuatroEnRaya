@@ -25,14 +25,7 @@ public class Tablero extends Pane {
         this.setMaxWidth(Ficha.TAM_FICHA*7);
         this.setMinWidth(Ficha.TAM_FICHA*7);
 
-        cuatroEnRaya = new CuatroEnRaya();
-        
-        for(int i=0; i<8; i++) {
-            Line line = new Line(Ficha.TAM_FICHA*i, Ficha.TAM_FICHA, 
-                    Ficha.TAM_FICHA*i, Ficha.TAM_FICHA*7);
-            this.getChildren().add(line);
-            
-        }
+        reiniciarPartida();
         
         this.setOnMouseClicked((MouseEvent mouseEvent) -> {
             System.out.println("Mouse clicked X,Y: " +
@@ -42,6 +35,18 @@ public class Tablero extends Pane {
             System.out.println("Columna: " + columna);
             colocarFicha(columna);
         });
+    }
+    
+    private void reiniciarPartida() {
+        cuatroEnRaya = new CuatroEnRaya();
+        
+        this.getChildren().clear();
+        
+        for(int i=0; i<8; i++) {
+            Line line = new Line(Ficha.TAM_FICHA*i, Ficha.TAM_FICHA, 
+                    Ficha.TAM_FICHA*i, Ficha.TAM_FICHA*7);
+            this.getChildren().add(line);            
+        }        
     }
     
     private void colocarFicha(int columna) {        
@@ -79,6 +84,7 @@ public class Tablero extends Pane {
                 alert.setHeaderText(null);
                 alert.setContentText("Has ganado la partida jugador " + ganador);
                 alert.showAndWait();
+                this.reiniciarPartida();
             } else {
                 if(cuatroEnRaya.isEmpatado()) {
                     System.out.println("Hay empate");
@@ -87,6 +93,7 @@ public class Tablero extends Pane {
                     alert.setHeaderText(null);
                     alert.setContentText("Se ha producido un empate");
                     alert.showAndWait();
+                    this.reiniciarPartida();
                 }
             }
 
